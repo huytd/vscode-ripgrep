@@ -70,7 +70,11 @@ export function activate(context: ExtensionContext) {
           return acc;
         },
         [] as string[],
-      );
+      ).reduce((acc, c) => {
+        if (isOption(c)) acc.push(c);
+        else acc.push(c.replace(/\s/g, '.*?'));
+        return acc;
+      }, [] as string[]);
       const command = quote([require("vscode-ripgrep").rgPath, "-n", ...q]);
       const options: QuickPickOptions = { matchOnDescription: true };
       const item = await window.showQuickPick(fetchItems(command, projectRoot), options);
