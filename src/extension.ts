@@ -59,6 +59,9 @@ export function activate(context: ExtensionContext) {
       const query = await window.showInputBox({
         prompt: "Please input search word.",
       });
+      if (!query.length) {
+        
+      }
       const isOption = (s: string) => /^--?[a-z]+/.test(s);
       const q = query.split(/\s/).reduce(
         (acc, c, i) => {
@@ -70,7 +73,9 @@ export function activate(context: ExtensionContext) {
           return acc;
         },
         [] as string[],
-      ).reduce((acc, c) => {
+      )
+      .concat("-i")
+      .reduce((acc, c) => {
         if (isOption(c)) acc.push(c);
         else acc.push(c.replace(/\s/g, '.*?'));
         return acc;
