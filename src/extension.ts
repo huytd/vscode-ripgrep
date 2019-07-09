@@ -72,10 +72,10 @@ export function activate(context: ExtensionContext) {
         [] as string[],
       ).reduce((acc, c) => {
         if (isOption(c)) acc.push(c);
-        else acc.push(c.replace(/\s/g, '.*?'));
+        else acc.push(c.replace(/\s/g, '.*'));
         return acc;
       }, [] as string[]);
-      const command = quote([require("vscode-ripgrep").rgPath, "-n", ...q]);
+      const command = quote([require("vscode-ripgrep").rgPath, "-n", ...q]).replace(/\.\\\*/g, ".*");
       const options: QuickPickOptions = { matchOnDescription: true };
       const item = await window.showQuickPick(fetchItems(command, projectRoot), options);
       if (!item) return;
