@@ -5,6 +5,8 @@ import { quote } from "shell-quote";
 import { window, commands, ExtensionContext, workspace, Selection, QuickPickItem, QuickPickOptions } from "vscode";
 import { isNumber } from "util";
 
+let previousSearchTerm = "";
+
 const MAX_DESC_LENGTH = 1000;
 const MAX_BUF_SIZE = 200000 * 1024;
 
@@ -58,10 +60,8 @@ export function activate(context: ExtensionContext) {
     const disposable = commands.registerCommand("extension.ripgrep", async () => {
       const query = await window.showInputBox({
         prompt: "Please input search word.",
-      });
-      if (!query.length) {
-        
-      }
+      }) || previousSearchTerm;
+      previousSearchTerm = query;
       const isOption = (s: string) => /^--?[a-z]+/.test(s);
       const q = query.split(/\s/).reduce(
         (acc, c, i) => {
