@@ -1,30 +1,8 @@
-# vscode-ripgrep
+# vscode-ripgrep-fuzzy
 
-## Features
+This is a fork from [bokuweb/vscode-ripgrep](https://github.com/bokuweb/vscode-ripgrep), with these features added:
 
-A ripgrep extension for Visual Studio Code.
+- Replace space with a non-greedy matching regex
+- Repeat last search if entering empty input
 
-![screenshot](https://github.com/bokuweb/vscode-ripgrep/blob/master/docs/screenshot.gif?raw=true)
-
-## Extension Settings
-
-## Known Issues
-
-## Release Notes
-
-### 0.2.1
-
-- fix: rename `ripGrep` to `ripgrep`
-- fix: fixed a bug, options is not parsed properly. 
-
-### 0.1.2
-
-- fix: filter invalid data
-
-### 0.1.1
-
-- fix: ignore some options.
-
-### 0.1.0
-
-- initial
+Why non-greedy matching regex? Because I'm lazy, instead of keep typing `.*` or `.*?` manually in my search, I'd rather type a space ` ` and have it translate directly to what it should.
